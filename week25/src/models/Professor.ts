@@ -1,17 +1,17 @@
 import {Person, Gender} from './Person';
 
-export class Student implements Person {
+export class Professor implements Person {
     name: string;
     age: number;
     gender: Gender;
-    studentId: number;
-    courses?: string[]; // ?는 선택적 사항일때
+    professorId: number;
+    courses?: string[];
 
-    constructor(name:string, age:number, gender: Gender, studentId: number, courses?:string[]){
+    constructor(name:string, age:number, gender: Gender, professorId: number, courses?:string[]){
         this.name = name
         this.age = age;
         this.gender = gender;
-        this.studentId = studentId;
+        this.professorId = professorId;
         this.courses = courses; // courses가 undefined할 수 있음
     }
 
