@@ -14,7 +14,7 @@ async function getNote(noteId: string) {
         <h1>notes/{note.id}</h1>
         <div>
           <h3>{note.title}</h3>
-          <h5>{note.content}</h5>
+          <h3>{note.content}</h3>
           <p>{note.created}</p>
         </div>
       </div>

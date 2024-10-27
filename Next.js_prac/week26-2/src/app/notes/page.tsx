@@ -33,7 +33,7 @@ function Note({ note }: any) {
 
   return (
     <Link href={`/notes/${id}`}>
-      <div>
+      <div className="card">
         <h2>{title}</h2>
       </div>
     </Link>
