@@ -1,12 +1,5 @@
-@font-face {
-  font-family: 'GeistVF';
-  src: url('/src/app/fonts/GeistVF.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 html, body {
-  font-family: 'GeistVF';
+  font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #000000;
   height: 100%;
