@@ -1,19 +1,40 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+//App.test.js
+const axios = require('axios');
+const { fetchUserName, calculateSum } = require('./App');
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock("axios"); // axios 모킹
+
+describe("유저 이름 패치 기능", () => {
+  beforeEach(() => {
+    axios.get.mockReset(); // 각 테스트 실행되기 전 axios mock 초기화
+  });
+
+  test("ID 값으로 유저이름 잘 가져오는지 검증", async () => {
+    // axios의 응답을 모킹
+    const mockData = { data: { name: "Leanne Graham" } };
+    axios.get.mockResolvedValueOnce(mockData);
+
+    const userName = await fetchUserName(1);
+    expect(userName).toBe("Leanne Graham");
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://jsonplaceholder.typicode.com/users/1"
+    );
+    // axios.get함수가 https://jsonplaceholder.typicode.com/users/1 이 인자로 불러와진건지 검증
+  });
 });
 
-describe(`<App />`, () => {
-  it("renders component correctly", () => {
-    render(<App />);
-    expect(screen.getByTestId("p-tag")).toMatchSnapshot();
-    expect(screen.getAllByTestId("p-tag")).toHaveLength(1);
-    expect(screen.getAllByTestId("p-tag")[0]).toHaveTextContent(
-      "Edit src/App.js and save to reload"
-    );
+describe("덧셈 기능", () => {
+  test("맞게 계산을 하는지 검증", () => {
+    const result = calculateSum("4,5,9");
+    expect(result).toBe(18); // 4 + 5 + 9 = 18
   });
+
+  test("음수 값 오류", () => {
+    expect(() => calculateSum("1,-2,3")).toThrow("음수 값 불가");
+  });
+
+  test("Nan 오류", () => {
+    expect(() => calculateSum("1,2,e")).toThrow("Nan 포함");
+  });
+
 });
